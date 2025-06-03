@@ -1,21 +1,29 @@
-const express = require("express");
-// const cors = require("cors");
-const dotenv = require("dotenv");
+require('dotenv').config();
 
-const bookRoutes = require("./routes/bookRoutes");
-const authorRoutes = require("./routes/authorRoutes");
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const bodyParser = require('body-parser');
 
-dotenv.config();
-
-const PORT = process.env.PORT || 3001;
+const bookRoutes = require('./routes/bookRoutes');
+const authorRoutes = require('./routes/authorRoutes');
 
 const app = express();
-// app.use();
-app.use(express.json());
+const PORT = process.env.PORT || 3000;
 
-app.use("/api/books", bookRoutes);
-app.use("/api/authors", authorRoutes);
+// Middleware
+app.use(cors());
+app.use(bodyParser.json());
 
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => console.log('Connected to MongoDB Atlas'))
+  .catch(err => console.error('MongoDB connection error:', err));
+
+// Routes
+app.use('/api/books', bookRoutes);
+app.use('/api/authors', authorRoutes);
+
+// Start server
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
+  console.log(`Server running on http://localhost:${PORT}`);
 });

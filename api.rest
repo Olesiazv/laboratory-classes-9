@@ -1,0 +1,46 @@
+### 📚 Pobierz listę książek
+GET http://localhost:3000/api/books
+
+###
+
+### 👤 Pobierz listę autorów
+GET http://localhost:3000/api/authors
+
+###
+
+### ➕ Dodaj nowego autora
+POST http://localhost:3000/api/authors
+Content-Type: application/json
+
+{
+  "firstName": "Adam",
+  "lastName": "Mickiewicz"
+}
+
+###
+
+### ✏️ Zaktualizuj autora (wstaw prawdziwe ID autora)
+PUT http://localhost:3000/api/authors/ID_AUTORA
+Content-Type: application/json
+
+{
+  "firstName": "Juliusz",
+  "lastName": "Słowacki"
+}
+
+###
+
+### ➕ Dodaj nową książkę (wstaw prawdziwe ID autora)
+POST http://localhost:3000/api/books
+Content-Type: application/json
+
+{
+  "title": "Pan Tadeusz",
+  "year": 1834,
+  "author": "ID_AUTORA"
+}
+
+###
+
+### ❌ Usuń książkę (wstaw prawdziwe ID książki)
+DELETE http://localhost:3000/api/books/ID_KSIAZKI
